@@ -1,0 +1,4 @@
+const REMOVE_FEED = 'REMOVE_FEED';
+const ADD_FEED = 'ADD_FEED';
+
+export { REMOVE_FEED, ADD_FEED };

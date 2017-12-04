@@ -1,27 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, { PureComponent } from 'react';
+import { StatusBar, StyleSheet, Platform, Text, View } from 'react-native';
+//import TopBarTextExample from './screen/TopBarTextExample';
+import TopBarTextExample from './app/screen/ScrollViewsExample';
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
-const instructions = Platform.select({
-	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-	android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-});
-
-export default class App extends Component<{}> {
+export default class App extends PureComponent<> {
 	render() {
+		const backgroundColor = '#222';
+		const appbarElevation = 4;
+		const borderBottomWidth = Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0;
 		return (
 			<View style={styles.container}>
-				<Text style={styles.welcome}>Welcome to React Native!</Text>
-				<Text style={styles.instructions}>To get started, edit App.js</Text>
-				<Text style={styles.instructions}>
-					{instructions}
-					hello
-				</Text>
+				<StatusBar barStyle="light-content" />
+				<View style={[styles.statusbar, backgroundColor ? { backgroundColor } : null]} />
+				<View
+					style={[
+						styles.appbar,
+						backgroundColor ? { backgroundColor } : null,
+						appbarElevation ? { elevation: appbarElevation, borderBottomWidth } : null,
+					]}
+				/>
+				<TopBarTextExample />
 			</View>
 		);
 	}
@@ -30,18 +28,40 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		backgroundColor: '#f5f5f5',
+	},
+	statusbar: {
+		backgroundColor: '#222',
+		height: Platform.OS === 'ios' ? 20 : 25,
+	},
+	appbar: {
+		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		height: Platform.OS === 'ios' ? 44 : 56,
+		backgroundColor: '#222',
+		borderBottomColor: 'rgba(0, 0, 0, 0.1)',
 	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10,
+	title: {
+		flex: 1,
+		margin: 16,
+		textAlign: Platform.OS === 'ios' ? 'center' : 'left',
+		fontSize: Platform.OS === 'ios' ? 20 : 18,
+		color: '#fff',
 	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5,
+	button: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		width: 56,
+		padding: Platform.OS === 'ios' ? 12 : 16,
+	},
+	touchable: {
+		padding: 16,
+		backgroundColor: '#fff',
+		borderBottomWidth: 1,
+		borderBottomColor: 'rgba(0, 0, 0, .06)',
+	},
+	item: {
+		fontSize: 16,
+		color: '#333',
 	},
 });
