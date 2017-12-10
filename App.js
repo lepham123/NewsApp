@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { StatusBar, StyleSheet, Platform, Text, View } from 'react-native';
 //import TopBarTextExample from './screen/TopBarTextExample';
 import TopBarTextExample from './app/screen/ScrollViewsExample';
+//import DemoListView from './app/screen/DemoListView';
 
 export default class App extends PureComponent<> {
 	render() {
@@ -20,6 +21,7 @@ export default class App extends PureComponent<> {
 					]}
 				/>
 				<TopBarTextExample />
+				{/* <DemoListView /> */}
 			</View>
 		);
 	}

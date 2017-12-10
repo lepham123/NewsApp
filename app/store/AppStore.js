@@ -1,4 +1,5 @@
 import { ReduceStore } from 'flux/utils';
+import { AsyncStorage } from 'react-native';
 import { omit } from 'lodash';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import * as AppActions from '../action/AppActions';
@@ -26,9 +27,19 @@ class AppStore extends ReduceStore {
 	// built-in ReduceStore hook
 	getInitialState() {
 		return {
-			_feeds: RssFeed('http://rss.cnn.com'),
+			_feeds: [],
+			le: 1,
 		};
 	}
+
+	// _loadInitFeed() {
+	// 	//RssFeed.feednami.load('http://dantri.com.vn/trangchu.rss').then(feed => feed.entries);
+
+	// 	AsyncStorage.setItem(
+	// 		'rssList',
+	// 		RssFeed.feednami.load('http://dantri.com.vn/trangchu.rss').then(feed => feed.entries),
+	// 	).then(rssList => rssList);
+	// }
 
 	addFeed(feed) {
 		const newFeeds = [...this.getRootState('_feeds')];
@@ -46,12 +57,26 @@ class AppStore extends ReduceStore {
 	reduce(state, action) {
 		let reducedState;
 		switch (action.type) {
-			case AppActions.ADD_FEED:
-				reducedState = {
-					_feeds: this.addFeed(action.data),
-				};
+			case AppActions.INIT_FEED:
+				// RssFeed.feednami.load('http://dantri.com.vn/trangchu.rss').then(feed => {
+				// 	reducedState = {
+				// 		_feeds: feed.entries,
+				// 	};
+
+				// 	console.log('reducedState._feeds', reducedState._feeds);
+				// });
+
+				// reducedState = {
+				// 	le: 2,
+				// };
+				console.log('reducedState._feeds');
 				break;
 			default:
+				RssFeed.feednami.load('http://dantri.com.vn/trangchu.rss').then(feed => {
+					reducedState = {
+						_feeds: feed.entries,
+					};
+				});
 				console.log(action.type, 'does nothing');
 		}
 

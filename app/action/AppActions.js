@@ -1,12 +1,16 @@
 import { dispatcher } from '../dispatcher/AppDispatcher';
-import * as AppConstants from '../constant/AppConstants';
+import AppConstants from '../constant/AppConstants';
 
-const addFeed = feed => {
-	dispatcher({ type: AppConstants.ADD_FEED, data: feed });
+const initFeed = () => {
+	dispatcher({ type: AppConstants.INIT_FEED });
+};
+
+const addFeed = () => {
+	dispatcher({ type: AppConstants.ADD_FEED });
 };
 
 const removeFeed = feed => {
 	dispatcher({ type: AppConstants.REMOVE_FEED, data: feed });
 };
 
-export { addFeed, removeFeed };
+export { initFeed, addFeed, removeFeed };

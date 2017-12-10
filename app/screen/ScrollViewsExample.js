@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import BasicListView from './BasicListView';
+import DemoListView from './DemoListView';
 
 import type { Route, NavigationState } from 'react-native-tab-view/types';
 
@@ -83,12 +84,7 @@ export default class TopBarTextExample extends PureComponent<*, State> {
 	_renderScene = ({ route }) => {
 		switch (route.key) {
 			case '1':
-				return (
-					<BasicListView
-						ref={(el: ?BasicListView) => (this._first = el)}
-						style={[styles.page, { backgroundColor: '#E3F4DD' }]}
-					/>
-				);
+				return <DemoListView />;
 			case '2':
 				return (
 					<BasicListView
